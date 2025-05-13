@@ -1,21 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login'
+import PrivateRoutes from './Component/PrivateRoutes'
+import Dashboard from './dashboard/Dashboard'
+import AddStudent from './Component/AddStudentFrom'
+import StudentDetails from './Component/StudentDetails'
 
-function App() {
-  const [filter, setFilter] = useState("")
-
+const App = () => {
   return (
-    <div className="p-4 max-w-3xl mx-auto">
-      <h1 className='text-xl font-bold mb-4'>Student Dashboard</h1>
-      {/* login */}
-      <select onChange={(e) => setFilter(e.target.value)} className='mb-4'>
-        <option>All Courses</option>
-        <option value="">React</option>
-        <option value="">Node.js</option>
-
-      </select>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Dashboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/add-student' element={<PrivateRoutes><AddStudent /></PrivateRoutes>} />
+        <Route path='/student/:id' element={<PrivateRoutes><StudentDetails /></PrivateRoutes>} />
+      </Routes>
+    </Router>
   )
 }
 
 export default App
+
